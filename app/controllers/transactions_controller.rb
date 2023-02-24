@@ -1,9 +1,11 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_trnsaction, only: %i[show edit update destroy]
+  before_action :set_categories_array, only: %i[edit update new create]
 
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
+    @transaction = Transaction.order(created_at: asc)
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -12,6 +14,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
+    @transaction = Category.where(author_id: current_user.id)
     @transaction = Transaction.new
   end
 
@@ -21,11 +24,19 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    name = params['activity']['name']
+    amount = params['activity']['amount']
+    category_ids = params['activity']['categories']
+
+    @transaction = Transaction.new(name: name, amount: amount)
+    @transaction.user_id = current_user.id
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
+        create_transaction_category(category_ids, @transaction)
+        format.html do
+          redirect_to category_url(category_ids[0]), notice: "Activity#{category_ids.length > 1 ? 's were' : was } successfully created." 
+        end
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -64,7 +75,18 @@ class TransactionsController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+
     def transaction_params
-      params.fetch(:transaction, {})
+      params.require(:transaction).permit(:name, :amount, :categories)
+    end
+
+    def set_categories_array
+      @category_array = Category.where(author_id: current_user.id)
+    end
+  
+    def create_transaction_category(category_ids, transaction)
+      category_ids.each do |category_id|
+        TransactionCategory.create(category_id: category_id, transaction_id: transaction.id)
+      end
     end
 end

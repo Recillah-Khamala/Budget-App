@@ -42,4 +42,6 @@ module Budgetapp
     # GZip all responses
     config.middleware.use Rack::Deflater
   end
+
+  config.action_mailer.default_url_options = { host: 'localhost' }
 end
