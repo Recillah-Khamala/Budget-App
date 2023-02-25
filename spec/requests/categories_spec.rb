@@ -26,14 +26,11 @@ RSpec.describe '/categories', type: :request do
         end.to change(Category, :count).by(1)
       end
 
-
-
       it 'redirects to the created category' do
         post categories_url, params: { category: { name: 'Books', icon: 'books.png' } }
         expect(response).to redirect_to(category_url(Category.last))
       end
     end
-
 
     context 'with invalid parameters' do
       it 'does not create a new Category' do
