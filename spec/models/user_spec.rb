@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   subject do
-    @user = User.create(name: 'Recilah', email: 'recillah@gmail.com', password: '123456', password_confirmation: '123456')
+    @user = User.create(name: 'Recilah', email: 'recillah@gmail.com', password: '123456',
+                        password_confirmation: '123456')
   end
 
   describe 'User ' do
@@ -21,4 +22,3 @@ RSpec.describe User, type: :model do
     end
   end
 end
-

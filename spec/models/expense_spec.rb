@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe Expense, type: :model do
   describe 'expense model' do
     before(:each) do
-      @user = User.create(name: 'Recilah', email: 'recillah@gmail.com', password: '123456', password_confirmation: '123456')
+      @user = User.create(name: 'Recilah', email: 'recillah@gmail.com', password: '123456',
+                          password_confirmation: '123456')
       @category = Category.new(name: 'Books', icon: 'books.png')
     end
     it 'does not accept an invalid name' do

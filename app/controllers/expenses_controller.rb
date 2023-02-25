@@ -10,8 +10,7 @@ class ExpensesController < ApplicationController
   end
 
   # GET /expense/1 or /expense/1.json
-  def show
-  end
+  def show; end
 
   # GET /expense/new
   def new
@@ -20,8 +19,7 @@ class ExpensesController < ApplicationController
   end
 
   # GET /expense/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /expense or /expense.json
   def create
@@ -47,7 +45,7 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.update(expense_params)
-        format.html { redirect_to expense_path(@expense), notice: "Expense was successfully updated." }
+        format.html { redirect_to expense_path(@expense), notice: 'Expense was successfully updated.' }
         format.json { render :show, status: :ok, location: @expense }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,30 +61,31 @@ class ExpensesController < ApplicationController
     @expense.destroy
 
     respond_to do |format|
-      format.html { redirect_to category_path(@category), notice: "Expense was successfully destroyed." }
+      format.html { redirect_to category_path(@category), notice: 'Expense was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_expense
-      @expense = Expense.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
+  # Use callbacks to share common setup or constraints between actions.
+  def set_expense
+    @expense = Expense.find(params[:id])
+  end
 
-    def expense_params
-      params.require(:expense).permit(:name, :amount)
-    end
+  # Only allow a list of trusted parameters through.
 
-    # def set_categories
-    #   @category = Category.where(user_id: current_user.id)
-    # end
-  
-    def create_expense_category(category_ids, expense)
-      category_ids.each do |category_id|
-        ExpenseCategory.create(category_id: category_id, expense_id: expense.id)
-      end
+  def expense_params
+    params.require(:expense).permit(:name, :amount)
+  end
+
+  # def set_categories
+  #   @category = Category.where(user_id: current_user.id)
+  # end
+
+  def create_expense_category(category_ids, expense)
+    category_ids.each do |category_id|
+      ExpenseCategory.create(category_id:, expense_id: expense.id)
     end
+  end
 end
