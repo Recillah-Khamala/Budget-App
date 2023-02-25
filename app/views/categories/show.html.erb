@@ -9,6 +9,9 @@
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this category', category_path(@category), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
+    <div>
+      <%= link_to 'Back to categories', categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    </div>
     <% if @category.expenses.empty? %> 
       <p>no expenses added yet</p>
     <% else %>
@@ -39,6 +42,5 @@
         <span>New expense</span>
       <% end %>
     </div>
-    <%= link_to 'Back to categories', categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
   </div>
 </div>
