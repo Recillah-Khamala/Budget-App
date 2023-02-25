@@ -1,14 +1,17 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Categories</h1>
-    <%= link_to 'New category', new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div id="groups" class=" group-container mt-3 d-flex gap-2 flex-column overflow-y-scroll">
+        <%= render @categories %>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div id="categories" class="min-w-full">
-    <%= render @categories %>
+<div class="d-flex fixed-bottom py-3 px-2" style="background-color: #60B524;">
+  <div class="container d-flex justify-content-center category-container">
+    <%= link_to new_category_path, class: "new-category" do %>
+      <p style="color: #fff;">New Category</p>
+    <% end %>
   </div>
 </div>

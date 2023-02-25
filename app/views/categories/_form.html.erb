@@ -1,17 +1,37 @@
-<%= form_with(model: category, class: "contents") do |form| %>
-  <% if category.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+<div class="container mt-5">
+  <%= form_with(model: @category, class: "contents") do |form| %>
+    <% if @category.errors.any? %>
+      <div id="error_explanation" class="bg-danger text-white px-3 py-2 font-medium rounded-lg mt-3">
+        <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-      <ul>
-        <% category.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% @category.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :icon, class: "form-label" %>
+      <%= form.text_field :icon, class: "form-control" %>
+    </div>
+
+    <div class="mb-3 d-flex justify-content-center">
+      <%= form.submit "#{action_name == 'edit' ? 'Update' : 'Save'}", class: "new-category btn btn-light" %>
     </div>
   <% end %>
+</div>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+<div class="d-flex fixed-bottom py-3 px-2" style="background-color: #60B524;">
+  <div class="container d-flex justify-content-center category-container">
+    <%= link_to categories_path, class: "back to category", style: 'text-decoration: none' do %>
+      <p style="color: #fff;">Back to Categories</p>
+    <% end %>
   </div>
-<% end %>
+</div>

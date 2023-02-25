@@ -1,9 +1,13 @@
 class Category < ApplicationRecord
-    belongs_to :user
+  belongs_to :user
 
-    has_many :expense_categories
-    has_many :expenses, through: :expense_categories
-    
-    validates :name, presence: true
-    validates :icon, presence: true
+  has_many :expense_categories
+  has_many :expenses, through: :expense_categories
+   
+  validates :name, presence: true
+  validates :icon, presence: true
+
+  def total_expenses
+    expenses.sum(:amount)
+  end
 end
