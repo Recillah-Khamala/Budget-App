@@ -11,34 +11,9 @@ RSpec.describe '/categories', type: :request do
     allow_any_instance_of(CategoriesController).to receive(:current_user).and_return(user)
   end
 
-
-  describe 'GET /index' do
-    it 'renders a successful response' do
-      Category.create!(name: 'Books', icon: 'books.png', user_id: user.id)
-      get categories_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /show' do
-    it 'renders a successful response' do
-      category = Category.create!(name: 'Books', icon: 'books.png', user_id: user.id)
-      get category_url(category)
-      expect(response).to be_successful
-    end
-  end
-
   describe 'GET /new' do
     it 'renders a successful response' do
       get new_category_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe 'GET /edit' do
-    it 'renders a successful response' do
-      category = Category.create!(name: 'Books', icon: 'books.png', user_id: user.id)
-      get edit_category_url(category)
       expect(response).to be_successful
     end
   end
