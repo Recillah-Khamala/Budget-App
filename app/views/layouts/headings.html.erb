@@ -1,18 +1,24 @@
-<% if flash[:show_transactions_title] || current_page?(categories_path || authenticated_root_path, skip_cache: true) %>
-  Transactions
-<% end %>
-<% if params[:id] && current_page?(category_path(params[:id]), skip_cache: true) %>
-  Category
-<% end %>
-<% if current_page?(new_category_path, skip_cache: true) %>
-  Add New Category
-<% end %>
-<% if params[:category_id] && current_page?(new_category_expenditure_path(params[:category_id]), skip_cache: true) %>
-  Add New Expenditure
-<% end %>
-<% if current_page?(new_user_session_path, skip_cache: true) %>
-  Log In
-<% end %>
-<% if current_page?(new_user_registration_path, skip_cache: true) %>
-  Sign Up
-<% end %>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary px-3" style="background-color: #316caf !important">
+  <% if controller_name != 'groups' %>
+    <a class="navbar-brand" href="<%= groups_path %>">
+      <i class="bi bi-arrow-left"></i>
+    </a>
+  <% end %>
+  <h1 class="navbar-brand mb-0 mx-auto text-white text-uppercase">
+    <% if controller_name == 'expenses' %>
+      <%= 'Transactions' %>
+    <% else %>
+      <%= 'Categories' %>
+    <% end %>
+  </h1>
+  <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <%= button_to 'SIGN OUT', destroy_user_session_path, method: :delete, data: {turbo: false}, class: 'btn btn-outline-light' %>
+      </li>
+    </ul>
+  </div>
+</nav>
