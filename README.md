@@ -77,7 +77,7 @@
 
 - [Deployed Link](https://wallet-int.onrender.com/)
 
-- [Live Demo](https://www.loom.com/share/38ced9b324e54840bda80b6ee07c5d19)
+- [Live Demo](https://www.loom.com/share/72a7d92ef2f44e9d94c019ea5bc91bcf)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
