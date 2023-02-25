@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1 or /categories/1.json
   def show
     @category = Category.find(params[:id])
-    @transactions = @category.actions.order(created_at: :asc)
+    @expenses = @category.expenses.order(created_at: :asc)
   end
 
   # GET /categories/new
@@ -68,6 +68,10 @@ class CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.fetch(:category, {})
+      params.require(:category).permit(:name, :icon)
+    end
+
+    def total(name)
+      "Name: #{name}"
     end
 end

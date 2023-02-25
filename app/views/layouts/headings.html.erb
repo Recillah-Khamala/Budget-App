@@ -1,0 +1,18 @@
+<% if flash[:show_transactions_title] || current_page?(categories_path || authenticated_root_path, skip_cache: true) %>
+  Transactions
+<% end %>
+<% if params[:id] && current_page?(category_path(params[:id]), skip_cache: true) %>
+  Category
+<% end %>
+<% if current_page?(new_category_path, skip_cache: true) %>
+  Add New Category
+<% end %>
+<% if params[:category_id] && current_page?(new_category_expenditure_path(params[:category_id]), skip_cache: true) %>
+  Add New Expenditure
+<% end %>
+<% if current_page?(new_user_session_path, skip_cache: true) %>
+  Log In
+<% end %>
+<% if current_page?(new_user_registration_path, skip_cache: true) %>
+  Sign Up
+<% end %>

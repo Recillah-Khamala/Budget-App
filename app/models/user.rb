@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
 
 #   Associations
-has_many :transactions
+has_many :expenses
 has_many :categories
 
 # Validations
