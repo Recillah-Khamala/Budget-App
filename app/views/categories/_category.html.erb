@@ -1,4 +1,4 @@
-<%= link_to categories_path(@category), class: "w-100", style: 'text-decoration: none; font-family: \'Proxima Nova\', sans-serif; color: #828282; ' do %>
+<%= link_to category_expense_path(category), class: "w-100", style: 'text-decoration: none; font-family: \'Proxima Nova\', sans-serif; color: #828282; ' do %>
   <div id="<%= @category %>" class="card d-flex flex-column justify-content-between align-items-center">
     <div class="w-100 gap-4 d-flex align-items-center justify-content-space-between p-2">
       <div style="width: 200px; height: 200px; overflow: hidden;">
@@ -13,9 +13,6 @@
     </div>
       <% if action_name != "show" %>
         <div class="d-flex gap-2 align-self-start pb-2 bg-primary">
-          <%= link_to edit_category_path(category), class: "btn btn-outline-light btn-sm", 'data-turbolinks': false do %>
-            Edit
-          <% end %>
           <%= button_to category_path(category), method: :delete, class: "btn btn-outline-light btn-sm", 'data-turbolinks': false, data: { confirm: 'Are you sure?' } do %>
             Delete
           <% end %>
