@@ -1,0 +1,13 @@
+<div class="d-flex flex-column align-items-center justify-content-end vh-100">
+  <div class="d-flex justify-content-center align-items-center mb-3 flex-grow-1">
+    <%= image_tag 'app_logo.png', class: 'img-fluid' %>
+  </div>
+  <div class="form-container d-grid gap-2 mb-3 w-100 px-5">
+    <%= link_to new_user_session_path, class: 'btn btn-primary' do %>
+      Log In
+    <% end %>
+    <%= link_to new_user_registration_path, class: 'btn btn-secondary' do %>
+      Register
+    <% end %>
+  </div>
+</div>

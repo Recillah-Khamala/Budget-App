@@ -1,14 +1,40 @@
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Categories</h1>
-    <%= link_to 'New category', new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div id="groups" class="group-container mt-3 d-flex gap-2 flex-column overflow-y-scroll">
+        <% @categories.each do |category| %>
+          <%= link_to category_path(category), class: "w-100", style: 'text-decoration: none; font-family: \'Proxima Nova\', sans-serif; color: #828282; ' do %>
+            <div id="<%= category %>" class="card d-flex flex-column justify-content-between align-items-center">
+              <div class="w-100 gap-4 d-flex align-items-center justify-content-space-between p-2">
+                <div style="width: 200px; height: 200px; overflow: hidden;">
+                  <%= image_tag category.icon, class: 'img-fluid' %>
+                </div>
+                <div class="flex-grow-1 text-center">
+                  <h5 class="card-title text-start"><%= category.name %></h5>
+                </div>
+                <div class="flex-grow-0 font-weight-bold">
+                  <p class="card-text" style="color: black"><strong>$<%= category.total_expenses %></strong></p>
+                </div>
+              </div>
+              <% if action_name != "show" %>
+                <div class="d-flex gap-2 align-self-start pb-2 bg-primary">
+                  <%= button_to category_path(category), method: :delete, class: "btn btn-outline-light btn-sm", 'data-turbolinks': false, data: { confirm: 'Are you sure?' } do %>
+                    Delete
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
+</div>
 
-  <div id="categories" class="min-w-full">
-    <%= render @categories %>
+<div class="d-flex fixed-bottom py-3 px-2" style="background-color: #60B524;">
+  <div class="container d-flex justify-content-center category-container">
+    <%= link_to new_category_path, class: "new-category" do %>
+      <p style="color: #fff;">New Category</p>
+    <% end %>
   </div>
 </div>

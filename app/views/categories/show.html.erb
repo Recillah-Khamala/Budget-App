@@ -6,10 +6,41 @@
 
     <%= render @category %>
 
-    <%= link_to 'Edit this category', edit_category_path(@category), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <div class="inline-block ml-2">
       <%= button_to 'Destroy this category', category_path(@category), method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>
-    <%= link_to 'Back to categories', categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div>
+      <%= link_to 'Back to categories', categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    </div>
+    <% if @category.expenses.empty? %> 
+      <p>no expenses added yet</p>
+    <% else %>
+      <% @category.expenses.order(created_at: :desc).each do |expense| %>
+        <div class="container">
+          <div id="expenses" class="expense-container">
+            <div class="card my-5">
+              <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center gap-3 just">
+                  <div class="d-flex align-items-center gap-2 d-flex justify-content-between">
+                    <h5 class="card-title"><%= expense.name %></h5>
+                    <span class="card-text font-bold">$<%= expense.amount %></span>
+                  </div>
+                </div>
+                <div class="d-flex gap-2">
+                  <%= button_to category_expense_path(@category, expense), method: :delete, class: "btn btn-sm btn-outline-danger" do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <div class="bg-secondary fixed-bottom d-flex justify-content-center py-3">
+      <%= link_to "/categories/#{@category.id}/expenses/new", class: "w-75 d-flex align-items-center justify-content-center gap-2 py-2 px-5 bg-secondary border text-white block font-medium" do %>
+        <span>New expense</span>
+      <% end %>
+    </div>
   </div>
 </div>
